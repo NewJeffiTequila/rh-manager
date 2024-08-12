@@ -7,7 +7,7 @@ export class User {
   id: number;
 
   @Column()
-  nome: string;
+  name: string;
 
   @Column()
   email: string;
@@ -16,5 +16,5 @@ export class User {
   position: Position;
 
   @Column()
-  dataAdmissao: Date;
+  dateAdmission: Date;
 }
