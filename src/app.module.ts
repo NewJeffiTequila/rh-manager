@@ -21,14 +21,16 @@ import { MedicalCertificateModule } from './medical_certificate/medical_certific
     AttendanceModule,
     VacationModule,
     MedicalCertificateModule,
-    ConfigModule.forRoot({
-      isGlobal: true,
-      load: [typeorm],
-    }),
-    TypeOrmModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) =>
-        configService.get('typeorm'),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: '',
+      database: 'rh_manager',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      migrations: [__dirname + '/migrations/*{.ts,.js}'],
+      synchronize: false,
     }),
   ],
   controllers: [AppController],

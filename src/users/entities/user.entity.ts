@@ -1,7 +1,7 @@
 import { Position } from 'src/position/entities/position.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 
-@Entity()
+@Entity({name:"users"})
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
@@ -12,9 +12,15 @@ export class User {
   @Column()
   email: string;
 
+  @Column()
+  password: string;
+
+  @Column()
+  positionId:number
+
   @ManyToOne(() => Position, (position) => position.users)
   position: Position;
 
   @Column()
-  dateAdmission: Date;
+  dateOfAdmission: Date;
 }
