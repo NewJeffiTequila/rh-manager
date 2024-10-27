@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { PositionService } from './position.service';
 import { CreatePositionDto } from './dto/create-position.dto';
 import { UpdatePositionDto } from './dto/update-position.dto';
@@ -23,8 +31,11 @@ export class PositionController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePositionDto: UpdatePositionDto) {
-    return this.positionService.update(+id, updatePositionDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updatePositionDto: UpdatePositionDto,
+  ) {
+    return await this.positionService.update(+id, updatePositionDto);
   }
 
   @Delete(':id')

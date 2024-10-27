@@ -11,6 +11,7 @@ import { PayrollModule } from './payroll/payroll.module';
 import { AttendanceModule } from './attendance/attendance.module';
 import { VacationModule } from './vacation/vacation.module';
 import { MedicalCertificateModule } from './medical_certificate/medical_certificate.module';
+import { CompaniesModule } from './companies/companies.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { MedicalCertificateModule } from './medical_certificate/medical_certific
       useFactory: async (configService: ConfigService) =>
         configService.get('typeorm'),
     }),
+    CompaniesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

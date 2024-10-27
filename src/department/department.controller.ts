@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { DepartmentService } from './department.service';
 import { CreateDepartmentDto } from './dto/create-department.dto';
 import { UpdateDepartmentDto } from './dto/update-department.dto';
@@ -13,8 +21,8 @@ export class DepartmentController {
   }
 
   @Get()
-  findAll() {
-    return this.departmentService.findAll();
+  async findAll() {
+    return await this.departmentService.findAll();
   }
 
   @Get(':id')
@@ -23,12 +31,19 @@ export class DepartmentController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDepartmentDto: UpdateDepartmentDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateDepartmentDto: UpdateDepartmentDto,
+  ) {
     return this.departmentService.update(+id, updateDepartmentDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.departmentService.remove(+id);
+  }
+  @Post('restore/:id')
+  async restore(@Param('id') id: number) {
+    return this.departmentService.restore(+id);
   }
 }
