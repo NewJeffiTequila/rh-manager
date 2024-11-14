@@ -38,6 +38,11 @@ export class PositionController {
     return await this.positionService.update(+id, updatePositionDto);
   }
 
+  @Post('/restore/:id')
+  async restore(@Param('id') id: string) {
+    return await this.positionService.restore(+id);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.positionService.remove(+id);

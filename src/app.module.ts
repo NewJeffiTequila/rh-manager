@@ -12,6 +12,7 @@ import { AttendanceModule } from './attendance/attendance.module';
 import { VacationModule } from './vacation/vacation.module';
 import { MedicalCertificateModule } from './medical_certificate/medical_certificate.module';
 import { CompaniesModule } from './companies/companies.module';
+import { CollaboratorModule } from './collaborator/collaborator.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { CompaniesModule } from './companies/companies.module';
         configService.get('typeorm'),
     }),
     CompaniesModule,
+    CollaboratorModule,
   ],
   controllers: [AppController],
   providers: [AppService],

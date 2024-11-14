@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreatePositionDto } from './dto/create-position.dto';
 import { UpdatePositionDto } from './dto/update-position.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -40,8 +44,14 @@ export class PositionService {
     }));
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} position`;
+  async findOne(id: number) {
+    const position = await this.positionsRepository.findOne({
+      where: { id },
+    });
+    if (!position) {
+      throw new BadRequestException(`Position with ID ${id} dont exist`);
+    }
+    return position;
   }
 
   async update(id: number, updatePositionDto: UpdatePositionDto) {
@@ -66,5 +76,14 @@ export class PositionService {
       throw new NotFoundException(`Position with ID ${id} not found`);
     }
     await this.positionsRepository.softDelete(id);
+  }
+  async restore(id: number): Promise<void> {
+    const result = await this.positionsRepository.restore(id);
+
+    if (result.affected === 0) {
+      throw new NotFoundException(
+        `Position with ID ${id} not found or not deleted`,
+      );
+    }
   }
 }

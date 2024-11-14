@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -44,5 +44,20 @@ export class AppController {
     </html>
   `;
     return htmlContent;
+  }
+
+  @Post('teste')
+  handleFormData(@Body() body) {
+    console.log(body);
+    return { body: body };
+  }
+  @Post()
+  handleFormDataTest(
+    @Body('Usuario') usuario: string,
+    @Body('Texto') texto: string,
+  ) {
+    console.log('Usuário:', usuario);
+    console.log('Texto:', texto);
+    return { usuario, texto };
   }
 }
