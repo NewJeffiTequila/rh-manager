@@ -12,9 +12,6 @@ export class User {
   @Column()
   email: string;
 
-  @ManyToOne(() => Position, (position) => position.users)
-  position: Position;
-
   @Column()
-  dateAdmission: Date;
+  password: string;
 }
